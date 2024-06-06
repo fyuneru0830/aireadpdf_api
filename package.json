@@ -1,0 +1,28 @@
+{
+  "name": "aireadpdf_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "canvas": "^2.11.2",
+    "cors": "^2.8.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "pdf-lib": "^1.17.1",
+    "pdf-poppler": "^0.2.1",
+    "pdf-to-img": "^3.0.0",
+    "pdf2pic": "^3.1.1",
+    "pdfjs-dist": "^4.3.136",
+    "sqlite3": "^5.1.7",
+    "ulid": "^2.3.0",
+    "uuid": "^9.0.1"
+  }
+}
