@@ -58,7 +58,7 @@ router.get('/', async (req, res) => {
         if (err) {
           return res.status(500).send('Failed to update task status in database.');
         }
-        res.send('PDF successfully converted to images.');
+        res.json({ message: 'PDF successfully converted to images.', status: 'success' });
       });
     } catch (err) {
       console.error('Error converting PDF to images:', err);
