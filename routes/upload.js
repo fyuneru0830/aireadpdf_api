@@ -1,3 +1,7 @@
+//用来接收上传的PDF文件
+//然后将文件保存到uploads文件夹
+//然后将文件名和文件夹名保存到数据库
+
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');

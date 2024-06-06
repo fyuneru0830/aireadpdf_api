@@ -1,3 +1,6 @@
+// 这个接口用来将图片转换为文字
+//利用了OpenAI的第三方代理的API
+
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const axios = require('axios');

@@ -1,3 +1,8 @@
+// 这个接口用来将PDF文件转换为图片
+// 因为OpenAI提供的接口没有办法直接处理PDF
+// 所以我们需要将PDF文件转换为图片
+// 然后将图片传递给OpenAI
+
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');

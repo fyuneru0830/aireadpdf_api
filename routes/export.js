@@ -1,3 +1,6 @@
+//SQLite数据库操作
+//ExcelJS生成Excel文件
+
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const ExcelJS = require('exceljs');
