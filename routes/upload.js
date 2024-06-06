@@ -70,7 +70,11 @@ router.post('/', upload.single('pdf'), (req, res) => {
         return res.status(500).send('Failed to record task in database.');
       }
       res.setHeader('Content-Type', 'text/plain; charset=utf-8'); // ここでエンコーディングを設定
-      const response = `File uploaded successfully: ${req.file.originalname}\nTask ID: ${ulidName}`;
+      const response = {
+        message: 'File uploaded successfully',
+        originalFileName: req.file.originalname,
+        taskId: ulidName
+      };
       res.send(response);
       console.log(`Response sent: ${response}`); // Added: Log response content
     }
