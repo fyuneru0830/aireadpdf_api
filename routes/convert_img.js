@@ -19,18 +19,13 @@ router.get('/', async (req, res) => {
     return res.status(400).send('ID is required');
   }
 
-  db.get(`SELECT * FROM tasks WHERE id = ?`, [taskId], async (err, task) => {
+  db.get(`SELECT * FROM tasks WHERE id = ? AND status = '已经保存PDF文件'`, [taskId], async (err, task) => {
     if (err) {
       return res.status(500).send('Failed to retrieve task from database.');
     }
+
     if (!task) {
-      return res.status(404).send('Task not found.');
-    }
-    if (task.status === '已转换为图片') {
-      return res.json({ message: 'PDF has already been successfully converted to images.', status: 'success' });
-    }
-    if (task.status !== '已经保存PDF文件') {
-      return res.status(400).send('Task is not in a valid state for conversion.');
+      return res.status(404).send('Task not found or already processed.');
     }
 
     const pdfPath = path.join(__dirname, '../uploads', task.task_name, `${task.task_name}.pdf`);
