@@ -11,21 +11,21 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Database connection error' });
       return;
     }
-    console.log('Connected to the SQLite database!');
+    //console.log('Connected to the SQLite database!');
   });
 
   const id = req.query.id;
-  console.log(`Received id: ${id}`); // 追加: idのログを出力
+  //console.log(`Received id: ${id}`); // 追加: idのログを出力
 
   const query = `SELECT api_response, status, tokens_used, image_name FROM converted_images WHERE task_id = ?`;
-  console.log(`Executing query: ${query} with id: ${id}`); // クエリとidをログに出力
+  //console.log(`Executing query: ${query} with id: ${id}`); // クエリとidをログに出力
   db.all(query, [id], (err, rows) => {
     if (err) {
       console.error('Database query error:', err.message);
       res.status(500).json({ message: 'Database error' });
       return;
     }
-    console.log('Query result:', rows); // クエリ結果をログに出力
+    //console.log('Query result:', rows); // クエリ結果をログに出力
     if (rows.length > 0) {
       const responses = rows.map(row => ({
         api_response: row.api_response,

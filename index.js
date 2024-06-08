@@ -11,8 +11,9 @@ const exportRoute = require('./routes/export');
 
 app.use(cors());
 
+// 添加这行以解析 JSON 请求体
+app.use(express.json());
 
-app.use(express.json({ type: 'application/json; charset=utf-8' })); // 変更: JSONのエンコーディングを設定
 app.use(express.urlencoded({ extended: true, type: 'application/x-www-form-urlencoded; charset=utf-8' })); // 変更: URLエンコードのエンコーディングを設定
 
 
