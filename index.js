@@ -10,6 +10,7 @@ const resultRouter = require('./routes/result');
 const exportRoute = require('./routes/export'); 
 
 app.use(cors());
+app.use(express.json()); // 解析 JSON 请求体
 
 
 app.use(express.json({ type: 'application/json; charset=utf-8' })); // 変更: JSONのエンコーディングを設定

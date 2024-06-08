@@ -10,8 +10,9 @@ const router = express.Router();
 
 const db = new sqlite3.Database('./tasks.db');
 
-router.get('/', async (req, res) => {
-  const taskId = req.query.id;
+router.post('/', async (req, res) => {
+  const { id: taskId, system_prompt, user_prompt } = req.body;
+  console.log(req.body);
 
   if (!taskId) {
     return res.status(400).send('Task ID is required');
@@ -53,7 +54,7 @@ router.get('/', async (req, res) => {
             messages: [
               {
                 role: 'system',
-                content: req.query.system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
+                content: system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
                 --- ヘッダーなど本文以外の内容 ---
     
                 --- メインコンテンツ ---
@@ -66,7 +67,7 @@ router.get('/', async (req, res) => {
               {
                 role: 'user',
                 content: [
-                  { type: 'text', text: req.query.user_prompt ||'文字を書き起こしてください' },
+                  { type: 'text', text: user_prompt || '文字を書き起こしてください' },
                   { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
                 ]
               }
