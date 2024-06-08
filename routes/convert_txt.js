@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
                 ]
               }
             ],
-            max_tokens: 300
+            max_tokens: 8000
           }, {
             headers: {
               'Content-Type': 'application/json',
