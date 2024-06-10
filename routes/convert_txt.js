@@ -82,10 +82,9 @@ router.post('/', async (req, res) => {
               'Accept': 'application/json',
               'Authorization': `Bearer sk-6HTrpakr7k0WngrG2492F498D6C240E7B547051c6540B142`
             },
-            timeout: 0 // 设置超时时间为无限长
+            timeout: 6000000 // 设置超时时间为60秒
           });
           //发送的请求打印到log
-          console.log(request.data)
           console.log(`API request successful for: ${imageName}`);
           const apiResponse = response.data;
           console.log('API Response:', apiResponse);
