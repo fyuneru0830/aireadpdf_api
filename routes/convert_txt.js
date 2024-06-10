@@ -10,11 +10,6 @@ const router = express.Router();
 
 const db = new sqlite3.Database('./tasks.db');
 
-<<<<<<< HEAD
-router.post('/', async (req, res) => {
-  const { id: taskId, system_prompt, user_prompt } = req.body;
-  console.log(req.body);
-=======
 // 添加这行以解析 JSON 请求体
 router.use(express.json());
 
@@ -22,7 +17,6 @@ router.post('/', async (req, res) => {
   const taskId = req.body.id;
 
   console.log('Received request with body:', req.body);
->>>>>>> dev
 
   if (!taskId) {
     return res.status(400).send('Task ID is required');
