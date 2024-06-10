@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
                 ]
               }
             ],
-            max_tokens: 1000
+            max_tokens: 300
           }, {
             headers: {
               'Content-Type': 'application/json',
@@ -84,6 +84,8 @@ router.post('/', async (req, res) => {
             },
             timeout: 0 // 设置超时时间为无限长
           });
+          //发送的请求打印到log
+          console.log(request.data)
           console.log(`API request successful for: ${imageName}`);
           const apiResponse = response.data;
           console.log('API Response:', apiResponse);
