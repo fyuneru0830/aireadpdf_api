@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
           console.log(`Sending API request for: ${imageName}`);
           const response = await axios.post('https://api2.aigcbest.top/v1/chat/completions', {
             model: 'gpt-4o',
-            max_tokens:1024,
+            max_tokens:10000,
             messages: [
               {
                 role: 'system',
