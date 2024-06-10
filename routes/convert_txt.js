@@ -57,11 +57,7 @@ router.post('/', async (req, res) => {
             messages: [
               {
                 role: 'system',
-<<<<<<< HEAD
-                content: system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
-=======
                 content: req.body.system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
->>>>>>> dev
                 --- ヘッダーなど本文以外の内容 ---
     
                 --- メインコンテンツ ---
@@ -74,20 +70,12 @@ router.post('/', async (req, res) => {
               {
                 role: 'user',
                 content: [
-<<<<<<< HEAD
-                  { type: 'text', text: user_prompt || '文字を書き起こしてください' },
-=======
                   { type: 'text', text: req.body.user_prompt ||'文字を書き起こしてください' },
->>>>>>> dev
                   { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
                 ]
               }
             ],
-<<<<<<< HEAD
-            max_tokens: 8000
-=======
-            max_tokens: 30000
->>>>>>> dev
+            max_tokens: 1000
           }, {
             headers: {
               'Content-Type': 'application/json',
