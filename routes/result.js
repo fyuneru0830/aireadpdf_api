@@ -44,7 +44,7 @@ router.get('/', (req, res) => {
           res.status(500).json({ message: 'Database error' });
           return;
         }
-        console.log('Task query result:', row); // クエリ結果をログに出力
+       // console.log('Task query result:', row); // クエリ結果をログに出力
         if (row) {
           //res.json({ status: row.status });
         } else {
