@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
     } else {
       // converted_imagesテーブルにレコードが見つからない場合、tasksテーブルを検索
       const taskQuery = `SELECT status FROM tasks WHERE id = ?`;
-      console.log(`Executing task query: ${taskQuery} with id: ${id}`); // クエリとidをログに出力
+     // console.log(`Executing task query: ${taskQuery} with id: ${id}`); // クエリとidをログに出力
       db.get(taskQuery, [id], (err, row) => {
         if (err) {
           console.error('Database query error:', err.message);
@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
         }
         console.log('Task query result:', row); // クエリ結果をログに出力
         if (row) {
-          res.json({ status: row.status });
+          //res.json({ status: row.status });
         } else {
           res.status(404).json({ message: 'No record found' });
         }
