@@ -10,9 +10,19 @@ const router = express.Router();
 
 const db = new sqlite3.Database('./tasks.db');
 
+<<<<<<< HEAD
 router.post('/', async (req, res) => {
   const { id: taskId, system_prompt, user_prompt } = req.body;
   console.log(req.body);
+=======
+// 添加这行以解析 JSON 请求体
+router.use(express.json());
+
+router.post('/', async (req, res) => {
+  const taskId = req.body.id;
+
+  console.log('Received request with body:', req.body);
+>>>>>>> dev
 
   if (!taskId) {
     return res.status(400).send('Task ID is required');
@@ -43,18 +53,21 @@ router.post('/', async (req, res) => {
         const imageName = path.basename(file);
 
         try {
-          res.write(`Reading file: ${imageName}\n`);
+          console.log(`Reading file: ${imageName}`);
           const base64Image = fs.readFileSync(imagePath, 'base64');
-          res.write(`File read successfully: ${imageName}\n`);
+          console.log(`File read successfully: ${imageName}`);
 
-          res.write(`Sending API request for: ${imageName}\n`);
-          console.log(`Starting to process image: ${imageName}`);
+          console.log(`Sending API request for: ${imageName}`);
           const response = await axios.post('https://api2.aigcbest.top/v1/chat/completions', {
             model: 'gpt-4o',
             messages: [
               {
                 role: 'system',
+<<<<<<< HEAD
                 content: system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
+=======
+                content: req.body.system_prompt || `あなたは文字入力のプロです。以下の形式でしか話せません。 
+>>>>>>> dev
                 --- ヘッダーなど本文以外の内容 ---
     
                 --- メインコンテンツ ---
@@ -67,21 +80,29 @@ router.post('/', async (req, res) => {
               {
                 role: 'user',
                 content: [
+<<<<<<< HEAD
                   { type: 'text', text: user_prompt || '文字を書き起こしてください' },
+=======
+                  { type: 'text', text: req.body.user_prompt ||'文字を書き起こしてください' },
+>>>>>>> dev
                   { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
                 ]
               }
             ],
+<<<<<<< HEAD
             max_tokens: 8000
+=======
+            max_tokens: 30000
+>>>>>>> dev
           }, {
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
               'Authorization': `Bearer sk-6HTrpakr7k0WngrG2492F498D6C240E7B547051c6540B142`
-            }
+            },
+            timeout: 0 // 设置超时时间为无限长
           });
-
-          res.write(`API request successful for: ${imageName}\n`);
+          console.log(`API request successful for: ${imageName}`);
           const apiResponse = response.data;
           console.log('API Response:', apiResponse);
 
@@ -91,7 +112,7 @@ router.post('/', async (req, res) => {
             output: apiResponse.usage.completion_tokens
           } : { input: 0, output: 0 };
 
-          res.write(`Updating data in database for: ${imageName}\n`);
+          console.log(`Updating data in database for: ${imageName}`);
           db.run(`
             UPDATE converted_images
             SET status = ?, api_response = ?, tokens_used = ?
@@ -99,22 +120,20 @@ router.post('/', async (req, res) => {
           `, ['completed', messageContent, JSON.stringify(tokensUsed), taskId, imageName], (err) => {
             if (err) {
               console.error('Error updating database', err);
-              res.write(`Error updating database for: ${imageName}\n`);
             } else {
-              res.write(`Data updated in database for: ${imageName}\n`);
+              console.log(`Data updated in database for: ${imageName}`);
             }
           });
 
           processedCount++;
-          res.write(`Processed ${processedCount} of ${totalFiles} images\n`);
+          console.log(`Processed ${processedCount} of ${totalFiles} images`);
 
         } catch (error) {
           console.error('Error making API request', error);
-          res.write(`Error processing image ${imageName}\n`);
         }
       }
 
-      res.end('Conversion process completed');
+      res.json({ message: 'Conversion process completed' });
     });
   });
 });
